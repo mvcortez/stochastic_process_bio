@@ -3,6 +3,7 @@
 \usepackage{setspace}
 \usepackage{latexsym}
 \usepackage{amsmath}
+\usepackage{hyperref}
 
 \newcommand{\bs}{\boldsymbol}
 \newcommand{\Xb}{\bs{X}}
@@ -31,9 +32,15 @@
 \begin{document}
 
 \begin{center}
-{\Huge \bf Stochastic Processes in Biology: All homework
+{\Large  \bf Homework Assignments for a Graduate Introduction to Stochastic Processes in Biology
 \\ \vskip5mm }
 \end{center}
+
+
+This is the collection of all four homework assignments in the course.  Because students
+also had to work on computational challenges, we assigned less homework that we would
+in a traditional class. Comments about the homework that were not included in our assignments
+are provided in \emph{italics}.
 
 \begin{center}
 {\Large \bf Homework 1
@@ -41,6 +48,7 @@
 \end{center}
 
 \vskip5mm 
+
 
 \begin{enumerate}
 
@@ -51,18 +59,21 @@ process.   You will have to be careful in the implementation
 as realizations can (and typically will) ``blow up'' in finite time.
 
 
-\item In the simple birth and death  process $\lambda_n = \lambda n$ and $\mu_n = \mu n$ for
+\item In the case of a simple birth and death  process  we have $\lambda_n = \lambda n$ and $\mu_n = \mu n$ for
 some constants $\lambda$ and $\mu$.   We can add immigration to this process, by assuming that
-during each interval of length $h$, there an individual will move into the population with probability
+during each interval of length $h$, an individual  moves into the population with probability
 $\nu h$.  Here $\nu$ is constant independent of the population size.  The deterministic model of the system
 has the form
 $$ 
 \frac{dn}{dt} = (\lambda - \mu)n + \nu
 $$
-Show that the mean of the of the corresponding stochastic model, $\bar n$, equals the solution 
+Show that the mean of the population size in the corresponding Master Equation, $\bar n(t)$, is equal to the solution 
 of this differential equation, with an appropriate initial condition.    Give an example to show that
 this is not true for more general birth and death processes with immigration, and illustrate the 
 example numerically.
+
+{\bf Comment:} \emph{We discussed how to obtain an equation for the mean of a stochastic process from
+the Master Equation in class.}
 
 \item The transition matrix for a four-state Markov chain is
 $$
@@ -73,16 +84,20 @@ P=\begin{pmatrix}
 1/2 & 0 & 1/2 & 0
 \end{pmatrix}
 $$
-(a) Draw the directed graph of the chain.\\
+(a) Draw the directed graph corresponding to this chain.\\
 (b) Show that the chain is irreducible, positive recurrent, and periodic.
 What is the period?\\
 (c) Find the unique stationary probability distribution.
 
-\item Assume that the arrival of proteins to a promoter can be described as a Poisson process with 
-rate $\lambda$.  If the promoter is not occupied, it will bind the protein. The time the proteins remain bound
+\item Assume that the arrival of proteins to region of DNA near a promoter can be described as a Poisson process with 
+rate $\lambda$.  If the region is not occupied, it will bind the protein. The time the proteins remain bound
 are independent random variables with mean $\mu$. A protein that arrives when the promoter is 
 occupied diffuses away.  Show that the long time fraction of time that the promoter is unoccupied is 
 $1/(1 + \lambda \mu)$.
+
+{\bf Comment:} \emph{This problem can be extended to provide a more realistic model of this process by,
+for example,  including a probability that the protein will bind to the region of DNA.}
+
 
 \item Assume that the sequence of action potentials (APs) fired by a neuron can be described as a Poisson process.
 For a fixed time $t$, let $T(t)$ be the time to the nearest AP in time.  This could be an AP
@@ -91,7 +106,6 @@ preceding or subsequent to the time $t$.   What is the mean of $T(t)$?  What is 
 \end{enumerate}
 
 
-\clearpage
 
 \begin{center}
 {\Large \bf Homework 2
@@ -118,7 +132,8 @@ $c_1 = 1, c_2 = 0.005, c_3 = 0.6$.
 Change these parameters gradually to verify your hypothesis in simulations.
 \end{itemize}
 
-
+{\bf Comment:} \emph{In class we described the correspondence between ODE and stochastic models
+in some detail.}
 
 \item Consider the following chemical reaction
 \begin{align*}
@@ -155,14 +170,14 @@ Compute the stationary distributions in the two cases.
 where $\phi(p)$ is a function that describes how the rate of mRNA transcription depends on the protein concentration $p$.
 
 \begin{itemize} 
-\item Write down the transition matrix for the Markov process describing this system
+\item What is the transition matrix for the Markov process describing this system?
 \item Consider the case of \textit{positive autoregulation}:
 
 \begin{equation*}
 \phi(p)=\frac{k_{0}\left(\frac{p}{K}\right)^n}{1+\left(\frac{p}{K}\right)^n}
 \end{equation*}
 
-Setting $k_l=0$, $\gamma_p=\gamma_r=k_p=k_0=1$ and $K=0.5$ in Eq. 1 above, determine the number of fixed points for $n=1$ and $n=10$. Determine the stability of the fixed points. [HINT: This question can be addressed numerically if you wish]
+Setting $k_l=0$, $\gamma_p=\gamma_r=k_p=k_0=1$ and $K=0.5$ in Eq. 1 above, numerically determine the number of fixed points for $n=1$ and $n=10$. Determine the stability of the fixed points. 
 
 \item Consider the case of \textit{negative autoregulation}:
 
@@ -176,7 +191,7 @@ Use the Gillespie algorithm to find and plot the stationary distribution of prot
 
 \end{enumerate}
 
-\clearpage
+%\clearpage
 
 \begin{center}
 {\Large \bf Homework 3
@@ -184,6 +199,7 @@ Use the Gillespie algorithm to find and plot the stationary distribution of prot
 \end{center}
 
 \vskip5mm 
+
 
 \begin{enumerate}
 \item In the course, we  have outlined how to derive the Fokker--Planck equation for the distribution of the membrane potential under 
@@ -196,6 +212,9 @@ the membrane potential follows the distribution given by Eq.(8.46).  You can do 
 sampling the potential at different times, or by running many simulations.
 \end{itemize}
 
+{\bf Comment:} \emph{This question refers to chapter 8 of the book \emph{Neuronal Dynamics} by W. Gerstner, et al. 
+The chapter can be found online here \url{https://neuronaldynamics.epfl.ch/online/Ch8.html}.}
+
 \item Use the derivation in Lecture 16, and the notes from the book by Gardiner to compute the expected time for a
 leaky integrate and fire neuron to fire. Assume a threshold $\theta$, resting potential set to 0, and $\tau_m = 1$.
 Assume that the input $RI_0$ is constant, and that the variance $\sigma^2(t) = \sigma^2$ is constant as well.  
@@ -204,6 +223,10 @@ Simulate an integrate and fire neuron \emph{with threshold} to show that this ex
 In particular, you will need to choose a synaptic weight $w_k = w$ (all equal), and input rate $\nu_k(t) = \nu$ (all equal and constant)
  to define the parameters $RI_0$ and $\sigma^2$.
 Note that you can use the code from the challenges for this simulation. 
+
+{\bf Comment:} \emph{This question refers the discussion of first passage time distributions in the book \emph{Stochastic Methods: A Handbook for the Natural and Social Science}
+by C. Gardiner.}
+
 
 \item Suppose that the times between spikes are distributed according to a gamma distribution, $\Gamma(\alpha, \beta)$.  
 \begin{itemize}
@@ -234,8 +257,6 @@ Setting $x=n/N$, Taylor expand the master equation retaining only terms up to or
 \end{enumerate}
 
 
-\clearpage 
-
 \begin{center}
 {\Large \bf Homework 4
 \\ \vskip5mm }
@@ -252,9 +273,9 @@ If $s_1 + s_2 \leq 1,000,000$, then each son gets the sum he asked for and the r
 
 Find all the pure strategy Nash equilibria of the game assuming that the two men only care about their share of inheritance, they do not talk to each other, and can only ask for integer amounts.
 
-\item  This is a problem about the iterated Prisoner's Dilemma.  First go over here \\
-\texttt{https://ncase.me/trust/} to see a nice illustration of different strategies.  We will assume
-that the payoff matrix on a single ground is given by $R$ to each player for mutual cooperation,
+\item  This is a problem about the iterated Prisoner's Dilemma, so that the game is played between two players over multiple rounds.  First look at
+\url{https://ncase.me/trust/} to see a nice illustration of different strategies.  We will assume
+that the payoff matrix on a single round is given by $R$ to each player for mutual cooperation,
 $P$ to each player for mutual defection. In the case only one player cheats then the reward is
 $T$ to the cheating player, and $S$ to the cooperating player.   We assume $T > R > P  > S$.  Note that this is a bit more general than the payoff matrix discussed by Dr. Stewart. We will extend this payoff matrix to multiple rounds.
 \begin{enumerate}
