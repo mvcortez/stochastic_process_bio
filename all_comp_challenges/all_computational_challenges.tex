@@ -345,6 +345,8 @@ CASE II: In the second case, the concentrations of gene product $Y$ and $Z$ are 
 
 In this challenge you will examine 3 different version of the integrate--and--fire model: the leaky (QIF), the quadratic,
 and the exponential integrate-and-fire model. The fourth group will implement an adaptive version of the integrate and fire model.
+See the discussion in the book by Gerstner,  et al.~\cite{gerstner14} for more details (the book is available online at
+\url{https://neuronaldynamics.epfl.ch}.
 
 To start, you will need a function that generates an inhomogeneous Poisson spike train. You can do this by using
 the method that we described in an earlier computational challenge, or simply using discrete increments.  Use a resolution
@@ -366,7 +368,7 @@ number of spikes in the interval.
 \end{enumerate}
 
 \item[\bf Group 2] 
-The exponential integrate and fire (EIF) model is given by 
+The exponential integrate and fire (EIF) model is described by the equation
 \begin{equation} \label{E:EIF}
 \tau_m u' = - u + \Delta_T \exp \left( \frac{u - \eta_{\text{rh}}}{\Delta_T} \right) + R I(t) 
 \end{equation}
@@ -380,12 +382,13 @@ as $I$ is increased from 0?
 You will have to set the threshold around $50mV$.  Be careful since the voltage can grow explosively.  Make sure to plot the membrane potential.
 \item Assume the input is described by a Poisson process. Compute the firing rate as a function of the input rate, assuming that the weight of each synapse is $w_k = 1$,
 with current measured in $pA$.  Assume that each input spike results in an instant depolarization.  As a result model the effect of each spike as  an instantaneous increase in the membrane potential
-by $\Delta u = 0.5mV$.  You can compute the output rate by recording the times between consecutive spikes, and dividing by the total
-number of spikes. Do this for $\Delta_T = 1, 0.5,$ and $0.1$.
+by $\Delta u = 0.5mV$.  Compute the output rate by recording the taking a sufficiently long interval, after a transient, and dividing by the 
+number of spikes in the interval.
+Do this for $\Delta_T = 1, 0.5,$ and $0.1$.
 \end{enumerate}
 
 \item[\bf Group 3] 
-The quadratic integrate and fire (QIF) model is given by 
+The quadratic integrate and fire (QIF) model is described by the equation
 \begin{equation} \label{E:QIF}
 \tau_m u' = - a_0 (u - u_{\text{rest}}))(u - u_c) + R I(t) 
 \end{equation}
@@ -399,8 +402,9 @@ as $I$ is increased from 0?
 You will have to set the threshold around $60mV$.  Be careful since the voltage can grow quickly.
 \item Assume the input is described by a Poisson process. Compute the firing rate as a function of the input rate, assuming that the weight of each synapse is $w_k = 1$,
 with current measured in $pA$.  Assume that each input spike results in an instant depolarization.  As a result model the effect of each spike as  an instantaneous increase in the membrane potential
-by $\Delta u = 0.5mV$.  You can compute the output rate by recording the times between consecutive spikes, and dividing by the total
-number of spikes.  Do this for $a_0 = 1, 2$, and $5$.
+by $\Delta u = 0.5mV$.  Compute the output rate by recording the taking a sufficiently long interval, after a transient, and dividing by the 
+number of spikes in the interval.
+  Do this for $a_0 = 1, 2$, and $5$.
 \end{enumerate}
 
 \item[\bf Group 4] 
@@ -445,7 +449,7 @@ p_{i,j}={N \choose j}\left((1-u) \frac{w_a i}{w_a i+(N-i)w_A}+v\frac{w_A (N-i)}{
 where the terms are as defined in lecture 14 and 15.
 
 \begin{enumerate}
-\item Setting $w_a=1+s$ and $w_A=1$, find the stationary distribution of the Wright-Fisher process at population sizes of $N=10$, $N=100$, $N=1000$ and $N=10000$. You should work with the other three groups and choose appropriate values of $u$, $v$ and $s$. Note these parameters should be chosen so that the values of $Nu$, $Nv$ and $Ns$ are the same for each population size [e.g. if you choose $v=0.01$ for $N=10$ you must use $v=0.001$ when $v=100$ and so on]. Compare the stationary distribution produced via simulation to that given in the lectures as the solution for the Fokker Planck equation $P^*=x^{Nv-1}(1-x)^{Nu-1}e^{Nsx}$
+\item Setting $w_a=1+s$ and $w_A=1$, find the stationary distribution of the Wright-Fisher process at population sizes of $N=10$, $N=100$, $N=1000$ and $N=10000$. You should work with the other three groups and choose appropriate values of $u$, $v$ and $s$. Note these parameters should be chosen so that the values of $Nu$, $Nv$ and $Ns$ are the same for each population size [e.g. if you choose $v=0.01$ for $N=10$ you must use $v=0.001$ when $v=100$ and so on]. Compare the stationary distribution produced via simulation to that given in the lectures as the solution for the Fokker--Planck equation $P^*=x^{Nv-1}(1-x)^{Nu-1}e^{Nsx}$
 
 \item Now set mutation rates $u=v=0$. Beginning with a single copy of allele $a$, i.e. $i=1$ use simulation to estimate the probability of fixation of $a$ for the same population sizes and values of $s$ as used previously. Compare the results to the analytic expression derived for the Moran model $f_1=\frac{w_A/w_a-1}{(w_A/w_a)^N-1}$ and to the approximation commonly quoted for the Wright-Fisher model $f_1=(1-e^{-s})/(1-e^{-Ns})$. 
 
@@ -585,9 +589,9 @@ in the first three challenges, we suggest that you do it using, for example, \ve
 
 \begin{enumerate}
 \item[\bf Group 1]  In this challenge you will implement Schelling' model  of segregation.   
-For a description of the model, see p. 108 of the book by Easley and Kleinberg.  As
+For a description of the model, see p. 108 of the book by Easley and Kleinberg~\cite{easley10} available at~\url{https://www.cs.cornell.edu/home/kleinber/networks-book/}.  As
 the book notes, you will have several options in the implementation, but the results should
-not differ.  I suggest using a double loop to go over rows and columns of the lattice sequentially, 
+remain qualitatively similar.  We suggest using a double loop to go over rows and columns of the lattice sequentially, 
 so that you can easily terminate the simulation if no agents have moved during one entire iteration.
 Note that the system can also reach a dynamic equilibrium in which some of the agents will
 keep moving, but the pattern is largely static.
@@ -615,8 +619,8 @@ regardless of its neighborhood.  How does increasing $r$ impact your observation
 \item BONUS: Animate your simulation.
 \end{enumerate}
 
-\item[\bf Group 2] In this challenge you will implement a spatial Moran model of cancer, as 
-discussed by N. Komarova, \emph{Bulletin of Mathematical Biology} (2006) 68: 1573--1599.
+\item[\bf Group 2] In this challenge you will implement a spatial Moran model of cancer,  
+discussed and analyzed by N. Komarova~\cite{komarova06}.
 Assume that cells  are arranged in a regular grid, at locations $i = 0, 1, 2, \ldots , N$. 
 In this compartment the total number of cells, $N,$ does not change, as each cell that dies
 is replaced by a new cell. 
@@ -645,7 +649,7 @@ You can use a compartment of size $N = 100$ or larger for the first part of the 
  \item Compare the fixation probabilities in the previous example against fixation probabilities in 
  a regular Moran model with no spatial organization.  Remember that we have computed these 
  fixation probabilities in class. 
-\item  Implement the following variation of the linear model discussed in Chapter 12 of Martin Nowak's book:
+\item  Implement the following variation of the linear model discussed in Chapter 12 of M. Nowak's book~\cite{nowak06}:
 \begin{enumerate} 
 \item[1.] A cell is chosen for reproduction according to its fitness, as in the non-spatial Moran model.
 \item[2.] If the reproducing cell is left of center, it pushes all cells to the left of it by one position to the left, and the leftmost cell (at position $i =0$), 
@@ -660,9 +664,10 @@ You can find a master equation for the first version of the model in the paper b
 The master equation for the second version is more complicated.
 
 \item[\bf Group 3] In this challenge you will implement the model described in the paper by I. Couzin, \emph{et al} we
-discussed in class. To do so you will need to define vectors with agent positions, direction and speed.  
+discussed in class~\cite{couzin05}. To do so you will need to define vectors with agent positions, direction and speed.  
 To update the position of the individuals, compute the direction of heading as described by equations 1-3 in
-the paper. Read the methods carefully: There is small noise that is added to the movement in each step. 
+the paper. Read the methods carefully: A small random perturbation is added to the movement in each step and this is important
+to recreating the results in some situations. 
 Use the parameters given in the caption of Fig. 1.
 \
  \begin{enumerate}
@@ -675,16 +680,16 @@ Use the parameters given in the caption of Fig. 1.
  \item Next recreate the plot in Fig 1a for populations of size 25, 50, and 100, and a different number of informed
  individuals.  Use $\omega = 0.5, 1,$ and $2$.  Terminate the simulations when all individuals are within a radius 10 of the food
  (success), or the simulation ran for more than 10000$s$ (failure).  Increment the number of informed individuals in steps of 
- approximately  5 \%, starting at  5 \%.  Use a number of simulations in each condition to estimate the chance of success.
+ approximately  5\%, starting at  5\%.  Use a number of simulations in each condition to estimate the chance of success.
  \item Assume that the population is running away from a predator instead of finding food.  The predator starts 10 units away from the centroid of the agent population, and always moves to the closest
- agent, regardless of distance. If the predator comes within 0.5 units of the agent, the agent is removed from the population.  In this case the vector  ${\mathbf g}_i$ points in the 
+ agent, regardless of distance. If the predator comes within 0.5 units of the agent, the agent is consumed and removed from the population.  In this case the vector  ${\mathbf g}_i$ points in the 
  direction opposite of the predator.  Assume that the speed of the predator  is 
  slightly larger than that of each agent,  $s_p > s$. Fix the population size at 25, and plot the survival time
   of the population as a function of the fraction of informed individuals, and the strength of interaction $\omega$.   
  \item BONUS: Animate your simulation.
  \end{enumerate}
  
-\item[\bf Group 4]  In this challenge you will implement a spatial version of the rock--paper--scissors game. The agents
+\item[\bf Group 4]  In this challenge you will implement a spatial version of the rock--paper--scissors game as discussed in~\cite{reichenbach07}. The agents
 are placed on a lattice with periodic boundary conditions, and each agent uses one of three strategies.  We can 
 thus think of the agents as belonging to one of three species.  Each cell (location) in the lattice is either empty or occupied by 
 an agent of one particular species.

@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{cai07}
 {\sc X.~Cai and Z.~Xu}, {\em K-leap method for accelerating stochastic
@@ -10,6 +10,15 @@
   selection for the tau-leaping simulation method}, The Journal of chemical
   physics, 124 (2006), p.~044109.
 
+\bibitem{couzin05}
+{\sc I.~D. Couzin, J.~Krause, N.~R. Franks, and S.~A. Levin}, {\em Effective
+  leadership and decision-making in animal groups on the move}, Nature, 433
+  (2005), pp.~513--516.
+
+\bibitem{easley10}
+{\sc D.~Easley, J.~Kleinberg, et~al.}, {\em Networks, crowds, and markets},
+  vol.~8, Cambridge university press Cambridge, 2010.
+
 \bibitem{elowitz00}
 {\sc M.~B. Elowitz and S.~Leibler}, {\em A synthetic oscillatory network of
   transcriptional regulators}, Nature, 403 (2000), pp.~335--338.
@@ -18,9 +27,18 @@
 {\sc T.~S. Gardner, C.~R. Cantor, and J.~J. Collins}, {\em Construction of a
   genetic toggle switch in escherichia coli}, Nature, 403 (2000), pp.~339--342.
 
+\bibitem{gerstner14}
+{\sc W.~Gerstner, W.~M. Kistler, R.~Naud, and L.~Paninski}, {\em Neuronal
+  dynamics: From single neurons to networks and models of cognition}, Cambridge
+  University Press, 2014.
+
 \bibitem{gonze20}
 {\sc D.~Gonze and P.~Ruoff}, {\em The goodwin oscillator and its legacy}, Acta
   biotheoretica,  (2020), pp.~1--18.
+
+\bibitem{komarova06}
+{\sc N.~L. Komarova}, {\em Spatial stochastic models for cancer initiation and
+  progression}, Bulletin of mathematical biology, 68 (2006), pp.~1573--1599.
 
 \bibitem{loinger07repress}
 {\sc A.~Loinger and O.~Biham}, {\em Stochastic simulations of the repressilator
@@ -30,5 +48,14 @@
 {\sc A.~Loinger, A.~Lipshtat, N.~Q. Balaban, and O.~Biham}, {\em Stochastic
   simulations of genetic switch systems}, Physical Review E, 75 (2007),
   p.~021904.
+
+\bibitem{nowak06}
+{\sc M.~A. Nowak}, {\em Evolutionary dynamics: exploring the equations of
+  life}, Harvard university press, 2006.
+
+\bibitem{reichenbach07}
+{\sc T.~Reichenbach, M.~Mobilia, and E.~Frey}, {\em Mobility promotes and
+  jeopardizes biodiversity in rock--paper--scissors games}, Nature, 448 (2007),
+  pp.~1046--1049.
 
 \end{thebibliography}
