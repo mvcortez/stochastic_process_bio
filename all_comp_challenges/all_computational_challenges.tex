@@ -36,21 +36,11 @@
 \begin{center}
 {\Huge \bf Stochastic Models in Biology: Computational Challenges
 \\ \vskip5mm  }
+
+
+Kre\v simir Josi\'c and Alexander Stewart.
 \end{center}
 
-By: Kre\v simir Josi\`c and Alexander Stewart.
-
-\begin{center}
-{\Large \bf Computational Challenge 0
-\\ \vskip5mm  }
-\end{center}
-
-As discussed in class, write a short Python program that takes a sequence of 19 numbers, and 
-generates 4 groups randomly. There should be 3 groups of 5, and one group of 4 numbers.
-
-Save the code in your GitHub repository and send me the link.  I will then clone the repository, and
-make sure that everything works.  You will also use the repository to turn in homeworks, so 
-it is good to set it up early.
 
 
 \begin{center}
@@ -58,8 +48,8 @@ it is good to set it up early.
 \\ \vskip5mm }
 \end{center}
 
-Rejection sampling is a  useful method for generating random samples from a distribution $f(x)$ that 
-may be hard to sample from.  The idea is to generate samples from a known distribution $g(x)$, and
+Rejection sampling is a  useful method for generating random samples from a distribution $f(x)$ that could be hard to sample from direclty. 
+ The idea is to generate samples from a known distribution $g(x)$, and
 then either to accept or reject the samples.  The criterion for acceptance and rejection,  and the algorithm are described here:
 
 \vskip5mm
@@ -93,9 +83,9 @@ Questions for discussion:
 
 
 In this computational challenge you will implement one of two Markov chain models of a biological system:
-\\
-\\
-\textbf{Model 1: Quasi-stationary distributions in the birth-death model.}  In a general birth and death process, the probability that the 
+
+\begin{enumerate}
+\item[\bf Group 1, 2:] {\bf Quasi-stationary distributions in the birth-death model.}  In a general birth and death process, the probability that the 
 population increases or decreases between steps can depend on the population size.  Denote the
 size of a population at time $t$ by $X_t$. The transition probabilities are then given by:
 \begin{align*}
@@ -103,9 +93,9 @@ P(X_{t+1} &= j+1 | X_{t} = j) = b_j \\
 P(X_{t+1} &= j-1 | X_{t} = j) = d_j \\
 P(X_{t+1} &= j | X_{t} = j) = 1 - ( b_j + d_j) 
 \end{align*}
-where additionally $d_0 = 0$ and $b_ 0 = 0$, so that a population with no individuals is an absorbing state.  Moreover,
-$\text{sup}_i ( b_i + d_i) \leq 1$.  Note that all states, except for 0, are transient.  To keep the population finite we 
-also assume that $b_N = 0$ for some $N > 1$.
+where additionally $d_0 = 0$ and $b_ 0 = 0$, so that the state of the population having no individuals is absorbing.  Assume
+$\text{sup}_i ( b_i + d_i) \leq 1$.  Note that all states, except for 0, are transient.  To keep the population finite 
+also assume that $b_k = 0$ for all $k \geq N$ and some $N >1$.
 
 If you don't remember the logistic growth model covered in most calculus classes, refresh your memory by reading the relevant Wikipedia page, or
 consulting any other resource. For a logistic growth process we can assume $b_i - d_i = ri (1 - i/K)$. Note that any choices of $b_i$ and $d_i$
@@ -124,32 +114,30 @@ around the carrying capacity.  The second suggests that the population goes exti
 \end{itemize}
 
 
-\noindent \textbf{Model 2: Fixation in the Moran model.}  The Moran model describes the frequency of different genes in a population of fixed size $N$.
+\item[\bf Group 3, 4:] {\bf Fixation in the Moran model.}  The Moran model describes the frequency of different genes in a population of fixed size, $N$.
 Here we will consider a haploid population with a genotype composed of a single locus, which can be occupied by one of two alleles, $a$ and $A$. We will assume that both alleles are present in the population, and that there is no selection for or against either allele.
 
 Denote the number of individuals with allele $a$ by $j$, and the number of individuals with allele $A$ by $N-j$. The Moran model assumes that birth and death occur simultaneously, as a single event. First an individual is chosen to reproduce with mutation. A second individual is then chosen to die. This birth-death event constitutes a single step in the Moran process. Denote the
 number of individuals with allele $a$ at time $t$ by $X_t$. The transition probabilities for this Moran process are given by:
 
+\hspace*{-1.5cm} 
+\vbox{
 \begin{align*}
 P(X_{t+1} &= j+1 | X_{t} = j) = \left(\frac{j}{N}(1-\mu_a)+\frac{N-j}{N}\mu_A\right)\times\left(\frac{N-j}{N}\right) \\
 P(X_{t+1} &= j-1 | X_{t} = j) =  \left(\frac{N-j}{N}(1-\mu_A)+\frac{j}{N}\mu_a\right)\times\left(\frac{j}{N}\right) \\
 P(X_{t+1} &= j | X_{t} = j) = 1 -  \left(\frac{j}{N}(1-\mu_a)+\frac{N-j}{N}\mu_A\right)\times\left(\frac{N-j}{N}\right)- \left(\frac{N-j}{N}(1-\mu_A)+\frac{j}{N}\mu_a\right)\times\left(\frac{j}{N}\right)
 \end{align*}
+}
 
 where $\mu_a$ is the probability that allele $a$ mutates to allele $A$ during reproduction and $\mu_A$ is the probability that allele $A$ mutates to allele $a$.   
 
 \begin{itemize}
-\item Assume that $\mu_a=\mu_A=0$. In this case the Moran model has two absorbing states at $j=0$ and $j=N$, i.e. one state in which all individuals have allele $A$ and one in which all individuals have allele $a$. Numerically estimate the probability that the Moran process initialized at $X_0=1$ will eventually reach fixation for $a$, i.e. the absorbing state in which all individuals have allele $a$.
+\item Assume that $\mu_a=\mu_A=0$. In this case the Moran model has two absorbing states at $j=0$ and $j=N$, \emph{i.e.} one state in which all individuals have allele $A$ and one in which all individuals have allele $a$. Numerically estimate the probability that the Moran process initialized at $X_0=1$ will eventually reach fixation for $a$, i.e. the absorbing state in which all individuals have allele $a$.
 \item Assume again that $\mu_a=\mu_A=0$. Conditional on $a$ reaching fixation, estimate the time for $a$ to become fixed for a Moran process initialized at $X_0=1$.
 \item Numerically estimate the stationary distribution for the Moran process with (i) $\mu_a=\mu_A=0.1/N$,  (ii) $\mu_a=\mu_A=1/N$ and  (iii) $\mu_a=\mu_A=10/N$.
 \item Briefly discuss how adding selection for and against $a$ might change these results.
 \end{itemize}
 
-\begin{enumerate}
-\item[\bf Group 1] Implement model 1.
-\item[\bf Group 2] Implement model 1.
-\item[\bf Group 3] Implement model 2.
-\item[\bf Group 4] Implement model 2.
 \end{enumerate}
 
 
@@ -162,7 +150,7 @@ You will be implementing a Yule process, where the number of births is proportio
 
 \begin{enumerate}
 	\item Implement the Yule process with fixed rate $\nu = 0.4n$, where $n$ is the size of the population.
-	\item Implement the Yule process with rate $\nu (t) = 0.4n + 2 sin(t)$.
+	\item Implement the Yule process with rate $\nu (t) = 0.4n + 2 \sin(t)$.
 \end{enumerate}
 
 Simulate the population on the time interval $[0, 100]$. In all cases show the distribution of population sizes at $t = 10, 50$ and 100. Start with $n(0) = 1$.
@@ -179,13 +167,12 @@ Implement the two stochastic processes by discretizing the time interval [0, 100
 \item[\bf Group 2] 
 	Implement the two stochastic processes by sampling the time increment to the next event. In the first case the time to the next event is exponentially distributed. Is this true in the second case?
 	
-	\
-	\
+\
 	
 	The next two groups will be implementing different approximations to this process known as $\tau$-leaping and $K$-leaping. You will need to coordinate a bit with groups 1 and 2 to make some comparisons
 	
 \item[\bf Group 3] 
-	Implement $\tau$-leaping by doing the following: Discretize the time into intervals of length $\tau > 0$, and assume that the birth rate in each interval is constant and determined by the population size at the beginning of the interval. Thus if the population at some time $t = j\tau$ equals $n(t)$, then the number of births in the interval $[j\tau,(j + 1)\tau)$ is approximated by a Poisson distribution with parameter $\tau\nu(t)$. Note that $\nu(t)$ depends on population size at time $t$.
+	Implement $\tau$-leaping~\cite{cao06} by doing the following: Discretize the time into intervals of length $\tau > 0$, and assume that the birth rate in each interval is constant and determined by the population size at the beginning of the interval. Thus if the population at some time $t = j\tau$ equals $n(t)$, then the number of births in the interval $[j\tau,(j + 1)\tau)$ is approximated by a Poisson distribution with parameter $\tau\nu(t)$. Note that $\nu(t)$ depends on population size at time $t$.
 
 \begin{enumerate}
 	\item Discuss how this sampling approach relates to the one developed by group 1. How do the approximate population distributions compare to the different values of $\tau$?
@@ -193,7 +180,7 @@ Implement the two stochastic processes by discretizing the time interval [0, 100
 \end{enumerate}
 	
 \item[\bf Group 4] 	
-	The idea of $K$-leaping is the following: Keep the population increments, $K$ fixed, but vary the time over which they happen. In the case of an increment by $K = 1$, the method reduces to the exact method implemented by Group 2. When $K > 1$, the time increment is the sum of exponentially distributed random variables with different parameters. To make this tractable, when doing $K$-leaping we approximate the distribution of a sum of $K$ exponentially distributed random variables with different parameters with the distribution of a sum of exponentially distributed random variables with the same parameter. The easiest thing to do is to choose $\nu(t)$ where $t$ is the endpoint of the previous time increment to determine the parameter of all variables in the sum. Remember that a sum of exponential random variables with the same parameter follows a gamma distribution.
+	The idea of $K$-leaping~\cite{cai07} is the following: Keep the population increments, $K$ fixed, but vary the time over which they happen. In the case of an increment by $K = 1$, the method reduces to the exact method implemented by Group 2. When $K > 1$, the time increment is the sum of exponentially distributed random variables with different parameters. To make this tractable, when doing $K$-leaping we approximate the distribution of a sum of $K$ exponentially distributed random variables with different parameters with the distribution of a sum of exponentially distributed random variables with the same parameter. The easiest thing to do is to choose $\nu(t)$ where $t$ is the endpoint of the previous time increment to determine the parameter of the variables in the sum. Remember that a sum of exponential random variables with the same parameter follows a gamma distribution.
 	
 \begin{enumerate}
 	\item Discuss how this sampling approach relates to the one developed by group 2. How do the approximate population distributions compare to the different values of $K$?
@@ -212,7 +199,7 @@ Implement the two stochastic processes by discretizing the time interval [0, 100
 
 In this challenge you will implement stochastic simulations of two synthetic biological circuits.
 The synthetic genetic switch, and the repressilator were described in two back--to--back papers
-in \emph{Nature} in 2000.  Please follow the link on the website to the two papers. 
+in \emph{Nature} in 2000~\cite{elowitz00,gardner00}.  
 
 In this challenge two groups will report on the deterministic version of models of these circuits, while the other two
 will report on the stochastic versions. The last part of each question asks that you 
@@ -222,23 +209,21 @@ need to work together on each project.
 
 %
 \begin{enumerate}
-\item[\bf Group 1] You will analyze the deterministic version of the genetic switch system described in section III of the paper by Loinger, et al. 
-(the one discussing the stochastic genetic switch).  The differential equation is given in Eq. (9). 
+\item[\bf Group 1] You will analyze the deterministic version of the genetic switch system described in section III of the paper by Loinger, et al.~\cite{loinger07toggle}.  The differential equation is given in Eq. (9). 
 \begin{itemize}
 \item Construct a Petri net representation of the system based on the description in the text  (you can
 also consider the master equation given in the same section).   
 How does the ODE relate to this representation? Why is this called an exclusive switch?
 \item Solve the ODE numerically and show the different trajectories in the phase plane.
-Coordinate with Group 2 on the parameters -- use the ones in the paper.  
+Use the parameters in the paper, and coordinate with Group 2.  
 The nullclines are the solution to the equations $A' = 0$ and $B' = 0$.  As discussed in the paper
-by Gardner, et al. they determine the behavior of the deterministic system (See Fig. 2). Perform the equivalent
+by Gardner, et al.~\cite{gardner00} the nullclines determine the behavior of the deterministic system (See Fig. 2). Perform the equivalent
 analysis for the system in Eq. (9).
 \end{itemize}
 
 
 
-\item[\bf Group 2] Consider the exclusive switch discussed in section III of the paper by Loinger, et al. 
-(the one discussing the stochastic genetic switch). The master equation for this system is given in Eq. (14) 
+\item[\bf Group 2] Consider the exclusive switch discussed in section III of the paper by  Loinger, et al.~\cite{loinger07toggle}. The master equation for this system is given in Eq. (14) 
 \begin{itemize}
 \item Construct a Petri net representation of the system based on the description in the text 
 and the master equation. 
@@ -251,13 +236,13 @@ change is as expected.
 using the deterministic equations.
 \end{itemize}
 
-\item[\bf Group 3] Consider the deterministic repressilator described via the Michaelis-Menten equations in Loinger, et al (the one discussing the repressilator).
+\item[\bf Group 3] Consider the deterministic repressilator described via the Michaelis-Menten equations in the second paper by Loinger, et al~\cite{loinger07repress}.
 \begin{itemize}
 \item Construct a Petri net representation of the system for case (i) with mRNA (i.e. corresponding to Eq. 1) and case (ii) without mRNA (i.e. corresponding to Eq.2)
 \item  Solve the ODEs for case (i) numerically with parameters $k=d_m=1$ and $d_p=g_p$. Plot phase portraits showing the region in which the system displays oscillations, with values of $g_p$ on the x-axis plotted against values of $g_m$ on the y-axis, for Hill coefficients $n=[1,2,3]$ (i.e three different phase plots, one for each value of $n$). Repeat the same exercise for case (ii) 
 \end{itemize}
 
-\item[\bf Group 4] Consider the stochastic repressilator described in Loinger, et al (the one discussing the repressilator) and in Elowitz and Leibler.
+\item[\bf Group 4] Consider the stochastic repressilator described in Loinger, et al~\cite{loinger07repress} and in Elowitz and Leibler~\cite{elowitz00}.
 \begin{itemize}
 \item Using both repressilator papers as a guide, write down a Master equation describing the stochastic version of Eq. 1 of Loinger (i.e a simple repressilator with reactions as described in the Michaelis-Menten kinetics section of that paper).
 \item Suggest a method for detecting oscillation-like behavior in a stochastic process. Apply your method to stochastic simulations of the simple repressilator for some of the same cases considered by Group 3 above (i.e., you do not need attempt a full phase portrait, but choose a few parameter sets that correspond to those explored by group 3, and try to find at least one case where oscillations appear to be happening).
@@ -290,8 +275,8 @@ Z' &=& \alpha_3 Y - \gamma_3 Z \\
 \end{eqnarray*}
 
 \begin{enumerate}
-\item Implement the oscillator by solving the ODEs for the values in the paper by Gonze and Ruoff (see Fig. 2).  Show the trajectories for all the three species.
-\item Work with Group 2 to write a corresponding Petri Net.  Assume that the equations are given for concentrations. What are reasonable values for the reaction rates so that the molecule number stays within at most a few hundred molecules in the SSA (to be implemented by Group 2)?  
+\item Implement the oscillator by solving the ODEs for the values in the paper by Gonze and Ruoff (see Fig. 2)~\cite{gonze20}.  Show the trajectories for all the three species.
+\item Work with Group 2 to construct the corresponding Petri Net.  Assume that the equations are given for concentrations. What are reasonable values for the reaction rates so that the molecule number stays within at most a few hundred molecules in the SSA (to be implemented by Group 2)?  
 \item Describe the negative auto-regulation intuitively. What is the main negative auto-regulation term?  Where does the delay come from and why is it important?
 \item Change the Hill coefficient, $n,$ to a value smaller than 8. What happens to the oscillations?  Why do you think that this happens.
 \end{enumerate}
@@ -360,6 +345,8 @@ CASE II: In the second case, the concentrations of gene product $Y$ and $Z$ are 
 
 In this challenge you will examine 3 different version of the integrate--and--fire model: the leaky (QIF), the quadratic,
 and the exponential integrate-and-fire model. The fourth group will implement an adaptive version of the integrate and fire model.
+See the discussion in the book by Gerstner,  et al.~\cite{gerstner14} for more details (the book is available online at
+\url{https://neuronaldynamics.epfl.ch}.
 
 To start, you will need a function that generates an inhomogeneous Poisson spike train. You can do this by using
 the method that we described in an earlier computational challenge, or simply using discrete increments.  Use a resolution
@@ -375,13 +362,13 @@ Set $\tau_m = 10 ms$ and $R = 500M \Omega$.  Set the threshold at 20 $mV$. Remem
 \begin{enumerate}
 \item Assume the input is described by a Poisson process. Compute the firing rate as a function of the input rate, assuming that the weight of each synapse is $w = 1$,
 with current measured in $pA$.  Assume that each input spike results in an instant depolarization.  As a result model the effect of each spike as  an instantaneous increase in the membrane potential
-by $\Delta u = 0.5mV$.  You can compute the output rate by recording the times between consecutive spikes, and dividing by the total
-number of spikes.
+by $\Delta u = 0.5mV$.  Compute the output rate by recording the taking a sufficiently long interval, after a transient, and dividing by the 
+number of spikes in the interval.
 \item Assume that the input is composed of two independent Poisson spike trains.  One corresponds to inputs with synapse weights $w = 1$ (excitatory inputs), and the other with $w = -1$ (inhibitory inputs).  Denote the two input rates by $\nu_E$ and $\nu_I$. Start with a $\nu_E$ that gave an output spike rate of 20$Hz$ in the previous part. Gradually increase the $\nu_I$, and plot the output firing rate, and the coefficient of variation for the inter-spike interval (time between spikes).  Make sure to plot some output spike trains. You can represent them as raster plots.
 \end{enumerate}
 
 \item[\bf Group 2] 
-The exponential integrate and fire (EIF) model is given by 
+The exponential integrate and fire (EIF) model is described by the equation
 \begin{equation} \label{E:EIF}
 \tau_m u' = - u + \Delta_T \exp \left( \frac{u - \eta_{\text{rh}}}{\Delta_T} \right) + R I(t) 
 \end{equation}
@@ -395,12 +382,13 @@ as $I$ is increased from 0?
 You will have to set the threshold around $50mV$.  Be careful since the voltage can grow explosively.  Make sure to plot the membrane potential.
 \item Assume the input is described by a Poisson process. Compute the firing rate as a function of the input rate, assuming that the weight of each synapse is $w_k = 1$,
 with current measured in $pA$.  Assume that each input spike results in an instant depolarization.  As a result model the effect of each spike as  an instantaneous increase in the membrane potential
-by $\Delta u = 0.5mV$.  You can compute the output rate by recording the times between consecutive spikes, and dividing by the total
-number of spikes. Do this for $\Delta_T = 1, 0.5,$ and $0.1$.
+by $\Delta u = 0.5mV$.  Compute the output rate by recording the taking a sufficiently long interval, after a transient, and dividing by the 
+number of spikes in the interval.
+Do this for $\Delta_T = 1, 0.5,$ and $0.1$.
 \end{enumerate}
 
 \item[\bf Group 3] 
-The quadratic integrate and fire (QIF) model is given by 
+The quadratic integrate and fire (QIF) model is described by the equation
 \begin{equation} \label{E:QIF}
 \tau_m u' = - a_0 (u - u_{\text{rest}}))(u - u_c) + R I(t) 
 \end{equation}
@@ -414,8 +402,9 @@ as $I$ is increased from 0?
 You will have to set the threshold around $60mV$.  Be careful since the voltage can grow quickly.
 \item Assume the input is described by a Poisson process. Compute the firing rate as a function of the input rate, assuming that the weight of each synapse is $w_k = 1$,
 with current measured in $pA$.  Assume that each input spike results in an instant depolarization.  As a result model the effect of each spike as  an instantaneous increase in the membrane potential
-by $\Delta u = 0.5mV$.  You can compute the output rate by recording the times between consecutive spikes, and dividing by the total
-number of spikes.  Do this for $a_0 = 1, 2$, and $5$.
+by $\Delta u = 0.5mV$.  Compute the output rate by recording the taking a sufficiently long interval, after a transient, and dividing by the 
+number of spikes in the interval.
+  Do this for $a_0 = 1, 2$, and $5$.
 \end{enumerate}
 
 \item[\bf Group 4] 
@@ -460,7 +449,7 @@ p_{i,j}={N \choose j}\left((1-u) \frac{w_a i}{w_a i+(N-i)w_A}+v\frac{w_A (N-i)}{
 where the terms are as defined in lecture 14 and 15.
 
 \begin{enumerate}
-\item Setting $w_a=1+s$ and $w_A=1$, find the stationary distribution of the Wright-Fisher process at population sizes of $N=10$, $N=100$, $N=1000$ and $N=10000$. You should work with the other three groups and choose appropriate values of $u$, $v$ and $s$. Note these parameters should be chosen so that the values of $Nu$, $Nv$ and $Ns$ are the same for each population size [e.g. if you choose $v=0.01$ for $N=10$ you must use $v=0.001$ when $v=100$ and so on]. Compare the stationary distribution produced via simulation to that given in the lectures as the solution for the Fokker Planck equation $P^*=x^{Nv-1}(1-x)^{Nu-1}e^{Nsx}$
+\item Setting $w_a=1+s$ and $w_A=1$, find the stationary distribution of the Wright-Fisher process at population sizes of $N=10$, $N=100$, $N=1000$ and $N=10000$. You should work with the other three groups and choose appropriate values of $u$, $v$ and $s$. Note these parameters should be chosen so that the values of $Nu$, $Nv$ and $Ns$ are the same for each population size [e.g. if you choose $v=0.01$ for $N=10$ you must use $v=0.001$ when $v=100$ and so on]. Compare the stationary distribution produced via simulation to that given in the lectures as the solution for the Fokker--Planck equation $P^*=x^{Nv-1}(1-x)^{Nu-1}e^{Nsx}$
 
 \item Now set mutation rates $u=v=0$. Beginning with a single copy of allele $a$, i.e. $i=1$ use simulation to estimate the probability of fixation of $a$ for the same population sizes and values of $s$ as used previously. Compare the results to the analytic expression derived for the Moran model $f_1=\frac{w_A/w_a-1}{(w_A/w_a)^N-1}$ and to the approximation commonly quoted for the Wright-Fisher model $f_1=(1-e^{-s})/(1-e^{-Ns})$. 
 
@@ -600,9 +589,9 @@ in the first three challenges, we suggest that you do it using, for example, \ve
 
 \begin{enumerate}
 \item[\bf Group 1]  In this challenge you will implement Schelling' model  of segregation.   
-For a description of the model, see p. 108 of the book by Easley and Kleinberg.  As
+For a description of the model, see p. 108 of the book by Easley and Kleinberg~\cite{easley10} available at~\url{https://www.cs.cornell.edu/home/kleinber/networks-book/}.  As
 the book notes, you will have several options in the implementation, but the results should
-not differ.  I suggest using a double loop to go over rows and columns of the lattice sequentially, 
+remain qualitatively similar.  We suggest using a double loop to go over rows and columns of the lattice sequentially, 
 so that you can easily terminate the simulation if no agents have moved during one entire iteration.
 Note that the system can also reach a dynamic equilibrium in which some of the agents will
 keep moving, but the pattern is largely static.
@@ -630,8 +619,8 @@ regardless of its neighborhood.  How does increasing $r$ impact your observation
 \item BONUS: Animate your simulation.
 \end{enumerate}
 
-\item[\bf Group 2] In this challenge you will implement a spatial Moran model of cancer, as 
-discussed by N. Komarova, \emph{Bulletin of Mathematical Biology} (2006) 68: 1573--1599.
+\item[\bf Group 2] In this challenge you will implement a spatial Moran model of cancer,  
+discussed and analyzed by N. Komarova~\cite{komarova06}.
 Assume that cells  are arranged in a regular grid, at locations $i = 0, 1, 2, \ldots , N$. 
 In this compartment the total number of cells, $N,$ does not change, as each cell that dies
 is replaced by a new cell. 
@@ -660,7 +649,7 @@ You can use a compartment of size $N = 100$ or larger for the first part of the 
  \item Compare the fixation probabilities in the previous example against fixation probabilities in 
  a regular Moran model with no spatial organization.  Remember that we have computed these 
  fixation probabilities in class. 
-\item  Implement the following variation of the linear model discussed in Chapter 12 of Martin Nowak's book:
+\item  Implement the following variation of the linear model discussed in Chapter 12 of M. Nowak's book~\cite{nowak06}:
 \begin{enumerate} 
 \item[1.] A cell is chosen for reproduction according to its fitness, as in the non-spatial Moran model.
 \item[2.] If the reproducing cell is left of center, it pushes all cells to the left of it by one position to the left, and the leftmost cell (at position $i =0$), 
@@ -675,9 +664,10 @@ You can find a master equation for the first version of the model in the paper b
 The master equation for the second version is more complicated.
 
 \item[\bf Group 3] In this challenge you will implement the model described in the paper by I. Couzin, \emph{et al} we
-discussed in class. To do so you will need to define vectors with agent positions, direction and speed.  
+discussed in class~\cite{couzin05}. To do so you will need to define vectors with agent positions, direction and speed.  
 To update the position of the individuals, compute the direction of heading as described by equations 1-3 in
-the paper. Read the methods carefully: There is small noise that is added to the movement in each step. 
+the paper. Read the methods carefully: A small random perturbation is added to the movement in each step and this is important
+to recreating the results in some situations. 
 Use the parameters given in the caption of Fig. 1.
 \
  \begin{enumerate}
@@ -690,16 +680,16 @@ Use the parameters given in the caption of Fig. 1.
  \item Next recreate the plot in Fig 1a for populations of size 25, 50, and 100, and a different number of informed
  individuals.  Use $\omega = 0.5, 1,$ and $2$.  Terminate the simulations when all individuals are within a radius 10 of the food
  (success), or the simulation ran for more than 10000$s$ (failure).  Increment the number of informed individuals in steps of 
- approximately  5 \%, starting at  5 \%.  Use a number of simulations in each condition to estimate the chance of success.
+ approximately  5\%, starting at  5\%.  Use a number of simulations in each condition to estimate the chance of success.
  \item Assume that the population is running away from a predator instead of finding food.  The predator starts 10 units away from the centroid of the agent population, and always moves to the closest
- agent, regardless of distance. If the predator comes within 0.5 units of the agent, the agent is removed from the population.  In this case the vector  ${\mathbf g}_i$ points in the 
+ agent, regardless of distance. If the predator comes within 0.5 units of the agent, the agent is consumed and removed from the population.  In this case the vector  ${\mathbf g}_i$ points in the 
  direction opposite of the predator.  Assume that the speed of the predator  is 
  slightly larger than that of each agent,  $s_p > s$. Fix the population size at 25, and plot the survival time
   of the population as a function of the fraction of informed individuals, and the strength of interaction $\omega$.   
  \item BONUS: Animate your simulation.
  \end{enumerate}
  
-\item[\bf Group 4]  In this challenge you will implement a spatial version of the rock--paper--scissors game. The agents
+\item[\bf Group 4]  In this challenge you will implement a spatial version of the rock--paper--scissors game as discussed in~\cite{reichenbach07}. The agents
 are placed on a lattice with periodic boundary conditions, and each agent uses one of three strategies.  We can 
 thus think of the agents as belonging to one of three species.  Each cell (location) in the lattice is either empty or occupied by 
 an agent of one particular species.
@@ -728,6 +718,7 @@ cell in this corner has probability is twice as likely as picking a cell from an
 
 \end{enumerate}
 
-
+\bibliographystyle{siamplain}
+\bibliography{challenges}
 
 \end{document}
